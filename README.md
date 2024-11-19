@@ -203,4 +203,31 @@ DELETE FROM Photos
 WHERE id_beer = 1;
 ```
 
+## Manipulations Avancées
+
+- Une procédure est stockée permettant à un utilisateur de noter une bière. Si l'utilisateur a déjà noté cette bière, la note est mise à jour ; sinon, une nouvelle note est ajoutée.
+
+```
+// Procédure dans le fichier 02-CREATE-functions.sql
+
+SELECT note_beer(1, 1, 5, 'Excellente bière!');
+
+SELECT note_beer(1, 1, 4, 'Toujours bonne, mais moins exceptionnelle.');
+```
+
+- Un déclencheur (trigger) pour vérifier que l'ABV (taux d'alcool) est compris entre 0 et 20 avant l'ajout de chaque bière.
+
+```
+// Procédure dans le fichier 03-CREATE-triggers.sql
+
+// Insertion valide
+INSERT INTO Beers (name, description, abv, price, id_brewery)
+VALUES ('Nouvelle Bière', 'Bière légère et fruitée.', 5.5, 4.99, 1);
+
+// Insertion invalide
+INSERT INTO Beers (name, description, abv, price, id_brewery)
+VALUES ('Bière Trop Forte', 'Trop alcoolisée.', 25.0, 5.99, 1);
+-- Erreur : ABV (taux d'alcool) doit être entre 0 et 20.
+```
+
 ---
