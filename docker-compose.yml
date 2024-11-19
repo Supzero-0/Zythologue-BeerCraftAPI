@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:15-alpine  # Version de PostgreSQL
+    container_name: postgres-container
+    restart: always
+    environment:
+      POSTGRES_USER: user       # Nom d'utilisateur
+      POSTGRES_PASSWORD: password   # Mot de passe
+      POSTGRES_DB: PostgreSQLdb       # Nom de la base de données
+    ports:
+      - "5432:5432"             # Expose le port 5432 pour PostgreSQL
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Stockage des données
+      - ./db-scripts:/docker-entrypoint-initdb.d/  # Chemin des scripts SQL pour l'initialisation de la base de données
+
+volumes:
+  postgres_data:
