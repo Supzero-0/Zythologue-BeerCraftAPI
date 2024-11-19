@@ -4,8 +4,8 @@ CREATE SCHEMA public;
 -- Création de la table Users
 CREATE TABLE Users (
     id_user SERIAL PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -15,7 +15,7 @@ CREATE TABLE Users (
 -- Création de la table Breweries
 CREATE TABLE Breweries (
     id_brewery SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     country VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -24,7 +24,7 @@ CREATE TABLE Breweries (
 -- Création de la table Beers
 CREATE TABLE Beers (
     id_beer SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
     abv FLOAT CHECK (abv >= 0 AND abv <= 20),
     price DECIMAL(10,2) NOT NULL CHECK (price >= 0),
@@ -69,7 +69,7 @@ CREATE TABLE Photos (
 -- Création de la table Categories
 CREATE TABLE Categories (
     id_category SERIAL PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(100) UNIQUE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -86,8 +86,8 @@ CREATE TABLE BeerCategories (
 -- Création de la table Ingredients
 CREATE TABLE Ingredients (
     id_ingredient SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    type VARCHAR(255),
+    name VARCHAR(100) NOT NULL,
+    type VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
