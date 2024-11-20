@@ -109,7 +109,7 @@ ORDER BY beer_count DESC;
 SELECT b.name AS beer_name
 FROM Beers b
 JOIN Breweries br ON b.id_brewery = br.id_brewery
-WHERE br.name = 'Nom de la Brasserie';
+WHERE br.name = 'Brasserie des Montagnes';
 ```
 
 4. Lister les utilisateurs et le nombre de bières qu'ils ont ajoutées à leurs favoris
