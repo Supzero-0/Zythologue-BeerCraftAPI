@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import { router as beersRouter } from "./routes/beersRouter";
+import { router as breweriesRouter } from "./routes/breweriesRouter";
 import { testDBConnection } from "./config/db";
 
 const app: Application = express();
@@ -36,4 +37,4 @@ app.get("/", (req, res) => {
 });
 
 // Routes de l'API
-app.use(`${path}/beers`, beersRouter);
+app.use(`${path}`, beersRouter, breweriesRouter);
