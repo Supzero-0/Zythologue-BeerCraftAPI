@@ -11,7 +11,18 @@ services:
       - "5432:5432"             # Expose le port 5432 pour PostgreSQL
     volumes:
       - PostgreSQLdb:/var/lib/postgresql/data # Stockage des données
-      - ./db-scripts:/docker-entrypoint-initdb.d/ # Chemin des scripts SQL pour l'initialisation de la base de données
+      - ./back-end/db-scripts:/docker-entrypoint-initdb.d/ # Chemin des scripts SQL pour l'initialisation de la base de données
+
+  node_app:
+    build: .
+    container_name: node-app-container
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    volumes:
+      - ./api:/usr/src/app
 
 volumes:
   PostgreSQLdb:
