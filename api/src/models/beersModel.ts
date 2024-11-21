@@ -9,7 +9,7 @@ export const beersModel = {
   },
   // Logic to get a beer by ID
   getById: async (id: number) => {
-    const query = "SELECT * FROM beers WHERE id = $1";
+    const query = "SELECT * FROM beers WHERE id_beer = $1";
     const { rows } = await pool.query(query, [id]);
     return rows;
   },
@@ -42,7 +42,7 @@ export const beersModel = {
     id_brewery: number
   ) => {
     const query =
-      "UPDATE beers SET name = $1, description = $2, abv = $3, price = $4, id_brewery = $5 WHERE id = $6 RETURNING *";
+      "UPDATE beers SET name = $1, description = $2, abv = $3, price = $4, id_brewery = $5 WHERE id_beer = $6 RETURNING *";
     const { rows } = await pool.query(query, [
       name,
       description,
@@ -55,7 +55,7 @@ export const beersModel = {
   },
   // Logic to delete a beer by ID
   delete: async (id: number) => {
-    const query = "DELETE FROM beers WHERE id = $1";
+    const query = "DELETE FROM beers WHERE id_beer = $1";
     await pool.query(query, [id]);
   },
 };

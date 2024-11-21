@@ -11,26 +11,55 @@ export const beersController = {
       res.status(500).json({ message: (error as Error).message });
     }
   },
-  getById: (req: Request, res: Response) => {
+  getById: async (req: Request, res: Response) => {
     // Logic to get a beer by ID
-    res
-      .status(200)
-      .json({ message: `Details of beer with ID: ${req.params.id}` });
+    try {
+      const beer = await beersModel.getById(parseInt(req.params.id));
+      res.status(200).json(beer);
+    } catch (error) {
+      res.status(500).json({ message: (error as Error).message });
+    }
   },
-  post: (req: Request, res: Response) => {
+  post: async (req: Request, res: Response) => {
     // Logic to create a new beer
-    res.status(201).json({ message: "Beer created successfully" });
+    try {
+      const { name, description, abv, price, id_brewery } = req.body;
+      const newBeer = await beersModel.post(
+        name,
+        description,
+        abv,
+        price,
+        id_brewery
+      );
+      res.status(201).json(newBeer);
+    } catch (error) {
+      res.status(500).json({ message: (error as Error).message });
+    }
   },
-  put: (req: Request, res: Response) => {
+  put: async (req: Request, res: Response) => {
     // Logic to update a beer by ID
-    res
-      .status(200)
-      .json({ message: `Beer with ID: ${req.params.id} updated successfully` });
+    try {
+      const { name, description, abv, price, id_brewery } = req.body;
+      const updatedBeer = await beersModel.put(
+        parseInt(req.params.id),
+        name,
+        description,
+        abv,
+        price,
+        id_brewery
+      );
+      res.status(200).json(updatedBeer);
+    } catch (error) {
+      res.status(500).json({ message: (error as Error).message });
+    }
   },
-  delete: (req: Request, res: Response) => {
+  delete: async (req: Request, res: Response) => {
     // Logic to delete a beer by ID
-    res
-      .status(200)
-      .json({ message: `Beer with ID: ${req.params.id} deleted successfully` });
+    try {
+      await beersModel.delete(parseInt(req.params.id));
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ message: (error as Error).message });
+    }
   },
 };

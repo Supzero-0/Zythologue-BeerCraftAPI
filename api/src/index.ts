@@ -1,14 +1,22 @@
-import express, { Application } from 'express';
-import { router as beersRouter } from './routes/beersRouter';
-import { testDBConnection } from './config/db';
+import express, { Application } from "express";
+import { router as beersRouter } from "./routes/beersRouter";
+import { testDBConnection } from "./config/db";
 
 const app: Application = express();
 const port = 3000;
 
+// Middleware pour parser les requêtes en JSON
+app.use(express.json());
+
+// Middleware pour parser les requêtes POST en URL-encoded
+app.use(express.urlencoded({ extended: true }));
+
 const startServer = async () => {
   const isDBConnected = await testDBConnection();
   if (!isDBConnected) {
-    console.error('❌ API non démarrée : impossible de se connecter à la base de données');
+    console.error(
+      "❌ API non démarrée : impossible de se connecter à la base de données"
+    );
     process.exit(1); // Arrête le processus avec une erreur
   }
 
@@ -19,12 +27,12 @@ const startServer = async () => {
 
 startServer();
 
-const version = 'v1';
+const version = "v1";
 const path = `/api/${version}`;
 
 // Route de test
 app.get("/", (req, res) => {
-  res.send('Hello, world!');
+  res.send("Hello, world!");
 });
 
 // Routes de l'API
