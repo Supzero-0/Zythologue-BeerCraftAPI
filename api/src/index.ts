@@ -1,5 +1,5 @@
 import express, { Application } from 'express';
-import { router as beersRouter } from './routes/beers';
+import { router as beersRouter } from './routes/beersRouter';
 
 const app: Application = express();
 const port = 3000;
