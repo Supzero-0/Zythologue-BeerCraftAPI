@@ -1,9 +1,16 @@
 import { Request, Response } from "express";
 import { beersModel } from "../models/beersModel";
+import {
+  BeerRequestBody,
+  BeerResponseBody,
+} from "../interfaces/beerInterfaces";
 
 export const beersController = {
   // Logic to get all beers
-  get: async (res: Response) => {
+  get: async (
+    req: Request<void>,
+    res: Response<BeerResponseBody[] | { message: string }>
+  ) => {
     try {
       const beers = await beersModel.get();
       res.status(200).json(beers);
@@ -11,7 +18,10 @@ export const beersController = {
       res.status(500).json({ message: (error as Error).message });
     }
   },
-  getById: async (req: Request, res: Response) => {
+  getById: async (
+    req: Request<{ id: string }>,
+    res: Response<BeerResponseBody | { message: string }>
+  ) => {
     // Logic to get a beer by ID
     try {
       const beer = await beersModel.getById(parseInt(req.params.id));
@@ -20,7 +30,10 @@ export const beersController = {
       res.status(500).json({ message: (error as Error).message });
     }
   },
-  post: async (req: Request, res: Response) => {
+  post: async (
+    req: Request<{}, {}, BeerRequestBody>,
+    res: Response<BeerResponseBody | { message: string }>
+  ) => {
     // Logic to create a new beer
     try {
       const { name, description, abv, price, id_brewery } = req.body;
@@ -36,7 +49,10 @@ export const beersController = {
       res.status(500).json({ message: (error as Error).message });
     }
   },
-  put: async (req: Request, res: Response) => {
+  put: async (
+    req: Request<{ id: string }, {}, BeerRequestBody>,
+    res: Response<BeerResponseBody | { message: string }>
+  ) => {
     // Logic to update a beer by ID
     try {
       const { name, description, abv, price, id_brewery } = req.body;
@@ -53,7 +69,10 @@ export const beersController = {
       res.status(500).json({ message: (error as Error).message });
     }
   },
-  delete: async (req: Request, res: Response) => {
+  delete: async (
+    req: Request<{ id: string }>,
+    res: Response<void | { message: string }>
+  ) => {
     // Logic to delete a beer by ID
     try {
       await beersModel.delete(parseInt(req.params.id));
