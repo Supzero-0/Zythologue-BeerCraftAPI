@@ -1,8 +1,23 @@
 import express, { Application } from 'express';
 import { router as beersRouter } from './routes/beersRouter';
+import { testDBConnection } from './config/db';
 
 const app: Application = express();
 const port = 3000;
+
+const startServer = async () => {
+  const isDBConnected = await testDBConnection();
+  if (!isDBConnected) {
+    console.error('❌ API non démarrée : impossible de se connecter à la base de données');
+    process.exit(1); // Arrête le processus avec une erreur
+  }
+
+  app.listen(port, () => {
+    console.log(`🚀 API en cours d'exécution sur http://localhost:${port}`);
+  });
+};
+
+startServer();
 
 const version = 'v1';
 const path = `/api/${version}`;
@@ -14,8 +29,3 @@ app.get("/", (req, res) => {
 
 // Routes de l'API
 app.use(`${path}/beers`, beersRouter);
-
-// Démarrer le serveur
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
