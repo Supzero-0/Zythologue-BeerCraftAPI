@@ -1,4 +1,3 @@
-import { log } from "console";
 import { pool } from "../config/db";
 import { BeerResponseBody } from "../interfaces/beerInterfaces";
 
