@@ -30,20 +30,20 @@ Les données de fixtures sont insérées dans les tables pour fournir des exempl
 
 ## Accéder à PostgreSQL
 
-Pour accéder à PostgreSQL à partir de votre machine locale, utilisez les informations de connexion suivantes :
+Pour accéder à PostgreSQL à partir de votre machine locale, utilisez les informations de connexion suivantes (ce sont celles indiqué dans le .env.example) :
 
 - Hôte : `localhost`
 - Port : `5432`
 - Utilisateur : `user`
 - Mot de passe : `password`
-- Base de données : `PostgreSQLdb`
+- Base de données : `database`
 
 Vous pouvez utiliser un client PostgreSQL comme `psql` ou une interface graphique comme DBeaver pour vous connecter à la base de données.
 
 ## Exemple de Connexion avec psql
 
 ```sh
-psql -h localhost -p 5432 -U user -d PostgreSQLdb
+psql -h localhost -p 5432 -U user -d database
 ```
 
 Entrez le mot de passe `password` lorsque vous y êtes invité.
