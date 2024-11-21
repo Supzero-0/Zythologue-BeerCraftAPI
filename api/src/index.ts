@@ -2,6 +2,8 @@ import express, { Application } from "express";
 import { router as beersRouter } from "./routes/beersRouter";
 import { router as breweriesRouter } from "./routes/breweriesRouter";
 import { testDBConnection } from "./config/db";
+import swaggerUi from "swagger-ui-express";
+import { swaggerDocs } from "./docs/swagger";
 
 const app: Application = express();
 const port = 3000;
@@ -38,3 +40,6 @@ app.get("/", (req, res) => {
 
 // Routes de l'API
 app.use(`${path}`, beersRouter, breweriesRouter);
+
+// Documentation Swagger
+app.use(`${path}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerDocs));
