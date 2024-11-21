@@ -13,4 +13,6 @@ export interface BeerResponseBody {
   abv: number;
   price: number;
   id_brewery: number;
+  created_at: Date;
+  updated_at: Date;
 }
