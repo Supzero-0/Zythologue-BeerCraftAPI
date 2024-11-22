@@ -4,14 +4,29 @@ services:
     container_name: postgres-container
     restart: always
     environment:
-      POSTGRES_USER: user       # Nom d'utilisateur
-      POSTGRES_PASSWORD: password   # Mot de passe
-      POSTGRES_DB: PostgreSQLdb       # Nom de la base de données
+      POSTGRES_USER: ${POSTGRES_USER}       # Nom d'utilisateur
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}   # Mot de passe
+      POSTGRES_DB: ${POSTGRES_DB}       # Nom de la base de données
     ports:
       - "5432:5432"             # Expose le port 5432 pour PostgreSQL
     volumes:
       - PostgreSQLdb:/var/lib/postgresql/data # Stockage des données
-      - ./db-scripts:/docker-entrypoint-initdb.d/ # Chemin des scripts SQL pour l'initialisation de la base de données
+      - ./back-end/db-scripts:/docker-entrypoint-initdb.d/ # Chemin des scripts SQL pour l'initialisation de la base de données
+
+  node_app:
+    build: .
+    container_name: node-app-container
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    volumes:
+      - ./api:/usr/src/app
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL} # URL de la base de données
 
 volumes:
   PostgreSQLdb:
