@@ -39,7 +39,8 @@ app.get("/", (req, res) => {
 });
 
 // Routes de l'API
-app.use(`${path}`, beersRouter, breweriesRouter);
+app.use(`${path}/beers`, beersRouter);
+app.use(`${path}/breweries`, breweriesRouter);
 
 // Documentation Swagger
 app.use(`${path}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerDocs));

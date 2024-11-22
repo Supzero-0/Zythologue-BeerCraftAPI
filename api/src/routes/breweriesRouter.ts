@@ -25,7 +25,7 @@ export const router = Router();
  *       500:
  *         description: Some server error
  */
-router.post("/brewery", breweriesController.post);
+router.post("/", breweriesController.post);
 
 /**
  * @swagger
@@ -45,7 +45,7 @@ router.post("/brewery", breweriesController.post);
  *       500:
  *         description: Some server error
  */
-router.get("/breweries", breweriesController.get);
+router.get("/", breweriesController.get);
 
 /**
  * @swagger
@@ -70,7 +70,7 @@ router.get("/breweries", breweriesController.get);
  *       500:
  *         description: Some server error
  */
-router.get("/brewery/:id", breweriesController.getById);
+router.get("/:id", breweriesController.getById);
 
 /**
  * @swagger
@@ -101,7 +101,7 @@ router.get("/brewery/:id", breweriesController.getById);
  *       500:
  *         description: Some server error
  */
-router.put("/brewery/:id", breweriesController.put);
+router.put("/:id", breweriesController.put);
 
 /**
  * @swagger
@@ -122,4 +122,4 @@ router.put("/brewery/:id", breweriesController.put);
  *       500:
  *         description: Some server error
  */
-router.delete("/brewery/:id", breweriesController.delete);
+router.delete("/:id", breweriesController.delete);
