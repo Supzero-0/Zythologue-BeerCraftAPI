@@ -18,6 +18,10 @@ ENV POSTGRES_USER=${POSTGRES_USER}
 ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 ENV POSTGRES_DB=${POSTGRES_DB}
 
+# Création d'un utilisateur non-`root` nommé admin
+RUN addgroup -S admin && adduser -S admin -G admin
+USER admin
+
 # Copie du script d'initialisation
 COPY ./back-end/db-scripts /docker-entrypoint-initdb.d/
 
