@@ -44,3 +44,5 @@ app.use(`${path}/breweries`, breweriesRouter);
 
 // Documentation Swagger
 app.use(`${path}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+export { app };
