@@ -1,8 +1,8 @@
-import { app } from "../index";
-import { beersModel } from "../models/beersModel";
+import { app } from "../../index";
+import { beersModel } from "../../models/beersModel";
 import request from "supertest";
 
-jest.mock("../models/beersModel");
+jest.mock("../../models/beersModel");
 
 describe("beersController", () => {
   afterEach(() => {

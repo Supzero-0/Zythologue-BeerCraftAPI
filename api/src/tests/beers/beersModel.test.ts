@@ -1,8 +1,7 @@
+import { beersModel } from "../../models/beersModel";
+import { pool } from "../../config/db";
 
-import { beersModel } from "../models/beersModel";
-import { pool } from "../config/db";
-
-jest.mock("../config/db");
+jest.mock("../../config/db");
 
 describe("beersModel", () => {
   afterEach(() => {
@@ -24,7 +23,10 @@ describe("beersModel", () => {
 
     const result = await beersModel.getById(1);
     expect(result).toEqual(mockBeer);
-    expect(pool.query).toHaveBeenCalledWith("SELECT * FROM beers WHERE id_beer = $1", [1]);
+    expect(pool.query).toHaveBeenCalledWith(
+      "SELECT * FROM beers WHERE id_beer = $1",
+      [1]
+    );
   });
 
   it("should create a new beer", async () => {
@@ -43,7 +45,14 @@ describe("beersModel", () => {
     const mockBeer = { id_beer: 1, name: "Updated Beer" };
     (pool.query as jest.Mock).mockResolvedValue({ rows: [mockBeer] });
 
-    const result = await beersModel.put(1, "Updated Beer", "Updated Description", 6.0, 12.0, 1);
+    const result = await beersModel.put(
+      1,
+      "Updated Beer",
+      "Updated Description",
+      6.0,
+      12.0,
+      1
+    );
     expect(result).toEqual(mockBeer);
     expect(pool.query).toHaveBeenCalledWith(
       "UPDATE beers SET name = $1, description = $2, abv = $3, price = $4, id_brewery = $5 WHERE id_beer = $6 RETURNING *",
@@ -53,6 +62,9 @@ describe("beersModel", () => {
 
   it("should delete a beer by ID", async () => {
     await beersModel.delete(1);
-    expect(pool.query).toHaveBeenCalledWith("DELETE FROM beers WHERE id_beer = $1", [1]);
+    expect(pool.query).toHaveBeenCalledWith(
+      "DELETE FROM beers WHERE id_beer = $1",
+      [1]
+    );
   });
 });
