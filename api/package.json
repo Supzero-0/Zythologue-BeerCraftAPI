@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.ts",
-    "test": "jest"
+    "test": "jest --forceExit --watchAll --maxWorkers=1"
   },
   "keywords": [],
   "author": "",

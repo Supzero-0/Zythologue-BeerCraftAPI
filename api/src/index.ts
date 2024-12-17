@@ -28,7 +28,9 @@ const startServer = async () => {
   });
 };
 
-startServer();
+if (process.env.NODE_ENV !== "test") {
+  startServer();
+}
 
 const version = "v1";
 const path = `/api/${version}`;
