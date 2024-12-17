@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-test-container
+    restart: always
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DB: test_database
+    ports:
+      - "5433:5432"  # Expose le port 5432 de PostgreSQL sur le port 5433 de l'hôte
+    volumes:
+      - PostgreSQLdb_test:/var/lib/postgresql/data
+      - ./back-end/db-scripts:/docker-entrypoint-initdb.d/  # Chemin des scripts SQL pour l'initialisation de la base de données
+
+  node_app:
+    build: .
+    container_name: node-app-test-container
+    restart: always
+    ports:
+      - "3001:3000"
+    depends_on:
+      - postgres
+    volumes:
+      - ./api:/usr/src/app
+    env_file:
+      - api/.env.test
+    environment:
+      DATABASE_URL: ${DATABASE_URL} # URL de la base de données
+
+volumes:
+  PostgreSQLdb_test:

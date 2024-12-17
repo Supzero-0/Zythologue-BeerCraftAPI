@@ -5,7 +5,7 @@ export const router = Router();
 
 /**
  * @swagger
- * /beer:
+ * /beers:
  *   post:
  *     summary: Create a new beer
  *     tags: [Beers]
@@ -49,7 +49,7 @@ router.get("/", beersController.get);
 
 /**
  * @swagger
- * /beer/{id}:
+ * /beers/{id}:
  *   get:
  *     summary: Get a beer by ID
  *     tags: [Beers]
@@ -74,7 +74,7 @@ router.get("/:id", beersController.getById);
 
 /**
  * @swagger
- * /beer/{id}:
+ * /beers/{id}:
  *   put:
  *     summary: Update a beer by ID
  *     tags: [Beers]
@@ -105,7 +105,7 @@ router.put("/:id", beersController.put);
 
 /**
  * @swagger
- * /beer/{id}:
+ * /beers/{id}:
  *   delete:
  *     summary: Delete a beer by ID
  *     tags: [Beers]

@@ -11,6 +11,11 @@ const swaggerOptions = {
     },
     servers: [
       {
+        description: "Production",
+        url: "https://zythologue-beercraftapi-production.up.railway.app/api/v1",
+      },
+      {
+        description: "Development",
         url: "http://localhost:3000/api/v1",
       },
     ],

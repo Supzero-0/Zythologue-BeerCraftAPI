@@ -16,10 +16,18 @@
     "rootDir": "./src",                                  /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
 
     /* Completeness */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
+
+    /* Jest Options */
+    "baseUrl": ".", // Nécessaire pour les alias, si utilisés
+    "paths": {
+      "@/*": ["src/*"] // Alias TypeScript pour correspondre à `moduleNameMapper` dans Jest
+    },
+    "types": ["node", "jest"] // Inclure les types Jest
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "tests/**/*.ts"
   ],
   "exclude": [
     "node_modules"
