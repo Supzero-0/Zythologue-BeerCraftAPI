@@ -6,7 +6,7 @@ import swaggerUi from "swagger-ui-express";
 import { swaggerDocs } from "./docs/swagger";
 
 const app: Application = express();
-const port = 3000;
+const port = process.env.NODE_ENV === "test" ? 3001 : 3000;
 
 // Middleware pour parser les requêtes en JSON
 app.use(express.json());
@@ -24,7 +24,7 @@ const startServer = async () => {
   }
 
   app.listen(port, () => {
-    console.log(`🚀 API en cours d'exécution sur http://localhost:${port}`);
+    console.log(`🚀 API en cours d'exécution sur ${port}`);
   });
 };
 
