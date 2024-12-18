@@ -3,10 +3,8 @@ services:
     image: postgres:15-alpine  # Version de PostgreSQL
     container_name: postgres-container
     restart: always
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}       # Nom d'utilisateur
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}   # Mot de passe
-      POSTGRES_DB: ${POSTGRES_DB}       # Nom de la base de données
+    env_file:
+      - api/.env
     ports:
       - "5432:5432"             # Expose le port 5432 pour PostgreSQL
     volumes:
