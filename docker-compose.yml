@@ -14,7 +14,7 @@ services:
       - ./back-end/db-scripts:/docker-entrypoint-initdb.d/ # Chemin des scripts SQL pour l'initialisation de la base de données
 
   node_app:
-    build: .
+    build: ./api
     container_name: node-app-container
     restart: always
     ports:
