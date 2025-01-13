@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import cors from "cors";
 import { router as beersRouter } from "./routes/beersRouter";
 import { router as breweriesRouter } from "./routes/breweriesRouter";
 import { testDBConnection } from "./config/db";
@@ -7,6 +8,12 @@ import { swaggerDocs } from "./docs/swagger";
 
 const app: Application = express();
 const port = process.env.NODE_ENV === "test" ? 3001 : 3000;
+
+app.use(
+  cors({
+    origin: "http://localhost:5174", // Frontend URL
+  })
+);
 
 // Middleware pour parser les requêtes en JSON
 app.use(express.json());
