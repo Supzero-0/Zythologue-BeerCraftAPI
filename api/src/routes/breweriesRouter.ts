@@ -123,3 +123,5 @@ router.put("/:id", breweriesController.put);
  *         description: Some server error
  */
 router.delete("/:id", breweriesController.delete);
+
+router.get("/:id/beers", breweriesController.getBeersByBrewery);

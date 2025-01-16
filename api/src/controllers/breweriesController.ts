@@ -4,6 +4,7 @@ import {
   BreweryRequestBody,
   BreweryResponseBody,
 } from "../interfaces/breweryInterfaces";
+import { BeerResponseBody } from "@/interfaces/beerInterfaces";
 
 export const breweriesController = {
   // Logic to get all breweries
@@ -68,6 +69,18 @@ export const breweriesController = {
     try {
       await breweriesModel.delete(parseInt(req.params.id));
       res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ message: (error as Error).message });
+    }
+  },
+  getBeersByBrewery: async (
+    req: Request<{ id: string }>,
+    res: Response<BeerResponseBody[] | { message: string }>
+  ) => {
+    // Logic to get all beers from a brewery
+    try {
+      const beers = await breweriesModel.find(parseInt(req.params.id));
+      res.status(200).json(beers);
     } catch (error) {
       res.status(500).json({ message: (error as Error).message });
     }

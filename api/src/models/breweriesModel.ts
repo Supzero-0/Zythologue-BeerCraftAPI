@@ -1,5 +1,6 @@
 import { pool } from "../config/db";
 import { BreweryResponseBody } from "../interfaces/breweryInterfaces";
+import { BeerResponseBody } from "../interfaces/beerInterfaces";
 
 export const breweriesModel = {
   // Logic to get all breweries
@@ -36,5 +37,11 @@ export const breweriesModel = {
   delete: async (id: number): Promise<void> => {
     const query = "DELETE FROM breweries WHERE id_brewery = $1";
     await pool.query(query, [id]);
+  },
+  // Logic to get all beers from a brewery
+  find: async (id: number): Promise<BeerResponseBody[]> => {
+    const query = "SELECT * FROM beers WHERE id_brewery = $1";
+    const { rows } = await pool.query(query, [id]);
+    return rows;
   },
 };
