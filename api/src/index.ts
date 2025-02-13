@@ -11,7 +11,9 @@ const port = process.env.NODE_ENV === "test" ? 3001 : 3000;
 
 app.use(
   cors({
-    origin: "http://localhost:5174", // Frontend URL
+    origin: "https://zytho-front-ml.vercel.app/", // Frontend URL
+    optionsSuccessStatus: 200,
+    methods: "GET, POST, PUT, DELETE",
   })
 );
 
